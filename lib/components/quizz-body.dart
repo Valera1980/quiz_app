@@ -7,43 +7,19 @@ class QuizzBody extends StatefulWidget {
 }
 
 class _QuizzBodyState extends State<QuizzBody> {
-  List<Icon> scoreKeeper = [
-//    Icon(
-//      Icons.check,
-//      color: Colors.green,
-//    ),
-//    Icon(
-//      Icons.check,
-//      color: Colors.green,
-//    ),
-//    Icon(
-//      Icons.close,
-//      color: Colors.red,
-//    ),
-//    Icon(
-//      Icons.check,
-//      color: Colors.green,
-//    ),
-//    Icon(
-//      Icons.close,
-//      color: Colors.red,
-//    ),
-  ];
+  List<Icon> scoreKeeper = [];
   List<String> questions = [
     'Is JAVA object oriented language',
     'Is JavaScript pure functional language',
-//    'Can you use clojures in C',
-//    'Has an abstract class instance',
-//    'Has singleton private constructor'
+    'Can you use clojures in C',
+    'Has an abstract class instance',
+    'Has singleton private constructor',
   ];
-  List<bool> answers = [
-    true,
-    false,
-//    false,
-//    false,
-//    true
-  ];
-  int questionNumber = 0;
+  String textMessage = '';
+  List<bool> answers = [true, false, false, false, true];
+  int counter = 0;
+//  int textIndex = 0;
+  static String text;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,7 +28,7 @@ class _QuizzBodyState extends State<QuizzBody> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text(questions[questionNumber])),
+            child: Center(child: Text(questions[counter])),
           ),
         ),
         Expanded(
@@ -63,8 +39,9 @@ class _QuizzBodyState extends State<QuizzBody> {
               color: Colors.green,
               onPressed: () {
                 setState(() {
-                  if (questionNumber < questions.length ) {
-                    if (answers[questionNumber] == true) {
+                  print(counter);
+                  if(counter < questions.length){
+                    if (answers[counter] == true) {
                       scoreKeeper.add(Icon(
                         Icons.check,
                         color: Colors.green,
@@ -75,10 +52,12 @@ class _QuizzBodyState extends State<QuizzBody> {
                         color: Colors.red,
                       ));
                     }
-                    questionNumber++;
-                    print(questionNumber);
-                    print('&&&&&&&&&&&&&&77');
-
+                  }
+                  if(counter < questions.length){
+                    counter++;
+                  }
+                  if(counter == questions.length - 1){
+                    counter = questions.length - 1;
                   }
                 });
               },
@@ -92,22 +71,23 @@ class _QuizzBodyState extends State<QuizzBody> {
               child: Text('False'),
               color: Colors.red,
               onPressed: () {
-                setState(() {
-                  if (questionNumber < questions.length - 1) {
-                    if (answers[questionNumber] == false) {
-                      scoreKeeper.add(Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ));
-                    } else {
-                      scoreKeeper.add(Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ));
-                    }
-                    questionNumber++;
-                  }
-                });
+//                setState(() {
+//                  counter++;
+//                  if (counter < questions.length) {
+//                    textIndex = counter;
+//                    if (answers[counter] == true) {
+//                      scoreKeeper.add(Icon(
+//                        Icons.close,
+//                        color: Colors.red,
+//                      ));
+//                    } else {
+//                      scoreKeeper.add(Icon(
+//                        Icons.check,
+//                        color: Colors.green,
+//                      ));
+//                    }
+//                  }
+//                });
               },
             ),
           ),
